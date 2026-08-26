@@ -293,9 +293,9 @@ The initial implementation should prioritize **analysis and placement policy eva
 
 Let there be \(N\) experts:
 
-\[
+$$
 E = \{e_1,e_2,\ldots,e_N\}
-\]
+$$
 
 For each expert \(e\), define:
 
@@ -305,30 +305,27 @@ For each expert \(e\), define:
 
 Let the available fast-memory budget for expert weights be:
 
-\[
-C_{\text{expert}}
-=
-C_{\text{fast}}
--
-C_{\text{KV}}
--
+$$
+C_{\text{expert}} =
+C_{\text{fast}} -
+C_{\text{KV}} -
 C_{\text{other}}
-\]
+$$
 
 The placement must satisfy:
 
-\[
-\sum_e x_e W_e \le C_{\text{expert}}
-\]
+$$
+\sum_e x_e W_e \leq C_{\text{expert}}
+$$
 
 A simplified objective is to maximize the expected benefit of keeping frequently accessed experts in the fast tier:
 
-\[
+$$
 \max_x
 \sum_e
 x_e f_e(B) \cdot
 \text{Cost}_{\text{slow}}(e)
-\]
+$$
 
 subject to the memory-capacity constraint.
 
