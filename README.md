@@ -299,9 +299,9 @@ $$
 
 For each expert \(e\), define:
 
-- \(W_e\): expert memory footprint
-- \(f_e(B)\): access frequency in concurrent batch \(B\)
-- \(x_e \in \{0,1\}\): whether expert \(e\) is placed in fast memory
+- $W_e$: expert memory footprint
+- $f_e(B)$: access frequency in concurrent batch $B$
+- $x_e \in \{0,1\}$: whether expert $e$ is placed in fast memory
 
 Let the available fast-memory budget for expert weights be:
 
