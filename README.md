@@ -621,8 +621,8 @@ Where possible, simulation parameters should be grounded in published measuremen
 
 Candidate MoE workloads include open-source models such as:
 
-- Mixtral-8x7B
-- DeepSeek-V2-Lite
+- Qwen/Qwen3-30B-A3B-Instruct-2507 (128 total experts, 8 active per token)
+- Qwen/Qwen3-30B-A3B-Thinking-2507-FP8 (FP8 quantized, 128 total experts, 8 active per token)
 - other open-source MoE models that fit the available hardware or can be evaluated using appropriate quantization/configuration
 
 ### Model-scale limitation
