@@ -1,0 +1,12 @@
+# Qwen/Qwen3-30B-A3B-Instruct-2507 Model Configuration
+model:
+  name: "Qwen/Qwen3-30B-A3B-Instruct-2507"
+  architecture: "Qwen3MoEForCausalLM"
+  total_params: 30000000000        # ~30B total parameters
+  active_params: 3000000000        # ~3B active per token
+  num_layers: 48
+  hidden_size: 2048
+  num_experts: 128                 # 128 total experts per MoE layer
+  top_k: 8                         # 8 active experts per token
+  expert_param_bytes: 268435456    # ~256MB per expert in fp16/bf16
+  router_module_pattern: "mlp.gate" # Submodule name for routing logits

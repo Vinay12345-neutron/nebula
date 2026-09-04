@@ -1,6 +1,6 @@
-# Project Nebula-MoE: Research Workspace Guidelines
+# Project TierMoE: Research Workspace Guidelines
 
-This repository hosts research for **Astera Labs Nebula 2026**: *Concurrent Batch-Aware Memory Tiering for MoE Inference on CXL-Expanded Systems*.
+This repository hosts research for **TierMoE**: *Batch-Aware Expert Placement for Memory-Tiered MoE Inference*.
 
 All AI agents and collaborators operating within this workspace must adhere to the following governance rules:
 

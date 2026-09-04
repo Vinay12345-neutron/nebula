@@ -1,0 +1,17 @@
+{
+  "run_dir": "results/exp03_rq3_coactivation/run_20260903_133002_5b1a74de",
+  "datasets": [
+    "gsm8k",
+    "sharegpt"
+  ],
+  "h3_status": "NOT SUPPORTED",
+  "findings": [
+    "Total capacity-constrained conditions evaluated: 16 settings.",
+    "CoActivation vs Static LFU: +41.18% hit rate gain, -10.18% CXL traffic reduction.",
+    "CoActivation vs Greedy (Pure Frequency): -1.25% hit rate difference, -0.61% CXL traffic reduction.",
+    "Paired t-test (CoActivation vs Greedy Hit Rate): t = -1.387, p = 0.2594.",
+    "Hypothesis H3 NOT SUPPORTED: Co-activation does not outperform pure frequency greedy placement."
+  ],
+  "constrained_pivot_hit": {
+    "Baseline-0-HBM-Only": {
+      

@@ -1,0 +1,64 @@
+{
+  "run_dir": "results/exp01_rq1_batch_aware/run_20260828_135512_1ebc07ec",
+  "algorithm_summary": [
+    {
+      "algorithm": "Baseline-0-HBM-Only",
+      "mean_hit_rate": 1.0,
+      "std_hit_rate": 0.0,
+      "mean_cxl_traffic_mb": 32768.0,
+      "mean_migration_mb": 32768.0,
+      "mean_solver_us": 6.412251171483696,
+      "p95_solver_us": 10.336352931661347
+    },
+    {
+      "algorithm": "Baseline-1-Naive-Overflow",
+      "mean_hit_rate": 0.8348731100559235,
+      "std_hit_rate": 0.14732882260798488,
+      "mean_cxl_traffic_mb": 177324128.0,
+      "mean_migration_mb": 20480.0,
+      "mean_solver_us": 24.15778853478064,
+      "p95_solver_us": 57.2276996336995
+    },
+    {
+      "algorithm": "Baseline-2-Static-LFU",
+      "mean_hit_rate": 0.8844501773516337,
+      "std_hit_rate": 0.10480035613957742,
+      "mean_cxl_traffic_mb": 124190517.33333333,
+      "mean_migration_mb": 129775.99980898698,
+      "mean_solver_us": 29.387593741270205,
+      "p95_solver_us": 44.2088880877378
+    },
+    {
+      "algorithm": "Baseline-3-Single-Request",
+      "mean_hit_rate": 0.9724971652030945,
+      "std_hit_rate": 0.07608096768244983,
+      "mean_cxl_traffic_mb": 155873162.66666666,
+      "mean_migration_mb": 138974392.48426262,
+      "mean_solver_us": 28.03983980748104,
+      "p95_solver_us": 43.58258044305782
+    },
+    {
+      "algorithm": "Nebula-Batch-Aware-CoActivation",
+      "mean_hit_rate": 0.8845206399758657,
+      "std_hit_rate": 0.10477019365871118,
+      "mean_cxl_traffic_mb": 124179914.66666667,
+      "mean_migration_mb": 201337.59968400002,
+      "mean_solver_us": 574.7525040234273,
+      "p95_solver_us": 1169.7381856691889
+    },
+    {
+      "algorithm": "Nebula-Batch-Aware-Greedy",
+      "mean_hit_rate": 0.9785317977269491,
+      "std_hit_rate": 0.05723102057466209,
+      "mean_cxl_traffic_mb": 129258666.66666667,
+      "mean_migration_mb": 116826047.95668066,
+      "mean_solver_us": 44.368442257451214,
+      "p95_solver_us": 59.02655895049235
+    }
+  ],
+  "hypothesis_h1_supported": true,
+  "findings": [
+    "Hypothesis H1 SUPPORTED: Batch-Aware Greedy achieves higher hit rates than Single-Request for concurrent batches (B >= 4).",
+    "CXL Traffic Reduction vs. Static LFU at 50% capacity: 2.17%."
+  ]
+}

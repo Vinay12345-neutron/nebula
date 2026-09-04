@@ -1,0 +1,36 @@
+# Experiment 03: RQ3 / Hypothesis H3 Authentic Model Routing & Co-Activation Sweep
+experiment:
+  id: "EXP-03"
+  name: "rq3_real_model_coactivation_sweep"
+  description: "Evaluate TierMoE Co-Activation vs Greedy and Static LFU on authentic routing traces from Qwen3-30B-A3B across GSM8K and ShareGPT workloads."
+  target_hypothesis: "H3"
+  target_rq: "RQ3"
+
+workload:
+  dataset: "authentic_model_traces"
+  trace_files:
+    gsm8k: "data/traces/qwen3_gsm8k_trace.parquet"
+    sharegpt: "data/traces/qwen3_sharegpt_trace.parquet"
+  batch_sizes: [4, 8, 16, 32]
+
+model_config: "configs/models/qwen3_30b_a3b.yaml"
+cxl_config: "configs/cxl/cxl_defaults.yaml"
+
+memory:
+  # Fast-tier expert capacity ratios (capacity-constrained regimes)
+  fast_memory_ratios: [0.25, 0.50]
+
+algorithms:
+  - "baseline_0_hbm_only"
+  - "baseline_2_static_lfu"
+  - "tiermoe_batch_aware_greedy"
+  - "tiermoe_batch_aware_coactivation"
+
+outputs:
+  results_dir: "results/exp03_rq3_coactivation"
+  metrics:
+    - "hit_rate"
+    - "cxl_traffic_mb"
+    - "demand_cxl_traffic_mb"
+    - "promotion_traffic_mb"
+    - "solver_overhead_us"

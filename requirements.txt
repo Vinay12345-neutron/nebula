@@ -1,0 +1,8 @@
+# Core Dependencies for Project TierMoE
+torch>=2.0.0
+numpy>=1.24.0
+pandas>=2.0.0
+pyarrow>=12.0.0
+pyyaml>=6.0
+transformers>=4.40.0
+accelerate>=0.28.0

@@ -1,0 +1,10 @@
+# Standard CXL Memory Tiering Simulation Parameters
+# Grounded in published CXL 2.0 / 3.0 Type-3 memory pool benchmarks
+cxl:
+  interface_version: "CXL 2.0 / 3.0"
+  modeled_latency_penalty_ns: 300       # Typical CXL round-trip latency overhead (150-400ns)
+  modeled_bandwidth_gbps: 32.0          # PCIe Gen5 x8 / CXL Type-3 channel bandwidth (32 GB/s)
+  bus_width_bits: 64
+  queue_depth: 32
+  eviction_cost_penalty_ratio: 0.1      # Relative overhead to write-back / drop clean pages
+  contention_factor: 1.25               # Non-linear latency scaling factor under saturated bandwidth

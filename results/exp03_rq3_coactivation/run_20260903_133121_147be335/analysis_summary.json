@@ -1,0 +1,91 @@
+{
+  "run_dir": "results/exp03_rq3_coactivation/run_20260903_133121_147be335",
+  "datasets": [
+    "gsm8k",
+    "sharegpt"
+  ],
+  "h3_status": "NOT SUPPORTED",
+  "findings": [
+    "Total capacity-constrained conditions evaluated: 16 settings.",
+    "CoActivation vs Static LFU: +41.18% hit rate gain, -10.18% CXL traffic reduction.",
+    "CoActivation vs Greedy (Pure Frequency): -1.25% hit rate difference, -0.61% CXL traffic reduction.",
+    "Paired t-test (CoActivation vs Greedy Hit Rate): t = -1.387, p = 0.2594.",
+    "Hypothesis H3 NOT SUPPORTED: Co-activation does not outperform pure frequency greedy placement."
+  ],
+  "constrained_pivot_hit": [
+    {
+      "dataset": "sharegpt",
+      "batch_size": 8,
+      "fast_memory_ratio": 0.25,
+      "Baseline-0-HBM-Only": 1.0,
+      "Baseline-2-Static-LFU": 0.3704020182291667,
+      "TierMoE-Batch-Aware-CoActivation": 0.9222819010416666,
+      "TierMoE-Batch-Aware-Greedy": 0.9250895182291666
+    },
+    {
+      "dataset": "sharegpt",
+      "batch_size": 16,
+      "fast_memory_ratio": 0.25,
+      "Baseline-0-HBM-Only": 1.0,
+      "Baseline-2-Static-LFU": 0.3793538411458333,
+      "TierMoE-Batch-Aware-CoActivation": 0.8278401692708334,
+      "TierMoE-Batch-Aware-Greedy": 0.8308512369791666
+    },
+    {
+      "dataset": "sharegpt",
+      "batch_size": 32,
+      "fast_memory_ratio": 0.25,
+      "Baseline-0-HBM-Only": 1.0,
+      "Baseline-2-Static-LFU": 0.3870442708333333,
+      "TierMoE-Batch-Aware-CoActivation": 0.7715250651041666,
+      "TierMoE-Batch-Aware-Greedy": 0.7761637369791666
+    },
+    {
+      "dataset": "sharegpt",
+      "batch_size": 32,
+      "fast_memory_ratio": 0.5,
+      "Baseline-0-HBM-Only": 1.0,
+      "Baseline-2-Static-LFU": 0.6614176432291666,
+      "TierMoE-Batch-Aware-CoActivation": 0.9236246744791666,
+      "TierMoE-Batch-Aware-Greedy": 0.9629720052083334
+    }
+  ],
+  "constrained_pivot_traf": [
+    {
+      "dataset": "sharegpt",
+      "batch_size": 8,
+      "fast_memory_ratio": 0.25,
+      "Baseline-0-HBM-Only": 32768.0,
+      "Baseline-2-Static-LFU": 2498304.0,
+      "TierMoE-Batch-Aware-CoActivation": 2648832.0,
+      "TierMoE-Batch-Aware-Greedy": 2663680.0
+    },
+    {
+      "dataset": "sharegpt",
+      "batch_size": 16,
+      "fast_memory_ratio": 0.25,
+      "Baseline-0-HBM-Only": 32768.0,
+      "Baseline-2-Static-LFU": 1912320.0,
+      "TierMoE-Batch-Aware-CoActivation": 2109952.0,
+      "TierMoE-Batch-Aware-Greedy": 2115328.0
+    },
+    {
+      "dataset": "sharegpt",
+      "batch_size": 32,
+      "fast_memory_ratio": 0.25,
+      "Baseline-0-HBM-Only": 32768.0,
+      "Baseline-2-Static-LFU": 1348608.0,
+      "TierMoE-Batch-Aware-CoActivation": 1552896.0,
+      "TierMoE-Batch-Aware-Greedy": 1573376.0
+    },
+    {
+      "dataset": "sharegpt",
+      "batch_size": 32,
+      "fast_memory_ratio": 0.5,
+      "Baseline-0-HBM-Only": 32768.0,
+      "Baseline-2-Static-LFU": 892928.0,
+      "TierMoE-Batch-Aware-CoActivation": 975360.0,
+      "TierMoE-Batch-Aware-Greedy": 932864.0
+    }
+  ]
+}

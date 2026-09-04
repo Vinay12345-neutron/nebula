@@ -1,0 +1,2 @@
+seeds: [42, 100, 2026]
+execution_type: deterministic_multi_seed_replay

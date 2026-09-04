@@ -1,0 +1,42 @@
+# Experiment 01: RQ1 / Hypothesis H1 Batch-Aware Placement Sweep
+experiment:
+  id: "EXP-01"
+  name: "rq1_batch_aware_placement_sweep"
+  description: "Evaluate TierMoE batch-aware expert placement vs LFU and single-request policies across batch sizes and fast-memory ratios."
+  target_hypothesis: "H1"
+  target_rq: "RQ1"
+
+workload:
+  dataset: "synthetic_trace_stream"
+  num_requests: 64
+  input_len: 128
+  output_len: 128
+  batch_sizes: [1, 2, 4, 8, 16, 32]
+  expert_skew_alpha: 1.1               # Zipfian distribution skew parameter
+  seeds: [42, 100, 2026]              # Multi-seed deterministic evaluation
+  execution_type: "deterministic_multi_seed_replay"
+
+model_config: "configs/models/qwen3_30b_a3b.yaml"
+cxl_config: "configs/cxl/cxl_defaults.yaml"
+
+memory:
+  # Fast-tier expert capacity as ratio of total expert memory
+  fast_memory_ratios: [0.25, 0.50, 0.75, 1.00]
+
+algorithms:
+  - "baseline_0_hbm_only"
+  - "baseline_1_naive_overflow"
+  - "baseline_2_static_lfu"
+  - "baseline_3_single_request"
+  - "tiermoe_batch_aware_greedy"
+  - "tiermoe_batch_aware_coactivation"
+
+outputs:
+  results_dir: "results/exp01_rq1_batch_aware"
+  metrics:
+    - "hit_rate"
+    - "cxl_traffic_mb"
+    - "demand_cxl_traffic_mb"
+    - "promotion_traffic_mb"
+    - "migration_volume_mb"
+    - "solver_overhead_us"

@@ -1,0 +1,35 @@
+algorithms:
+- baseline_0_hbm_only
+- baseline_2_static_lfu
+- baseline_3_single_request
+- tiermoe_batch_aware_greedy
+batch_sizes:
+- 4
+- 8
+- 16
+- 32
+cxl_bandwidth_gbps: 32.0
+cxl_latency_ns: 300.0
+experiment_id: EXP-02
+experiment_name: rq2_request_divergence_overlap_sweep
+expert_size_bytes: 268435456
+fast_memory_ratios:
+- 0.25
+- 0.5
+input_len: 128
+num_experts: 128
+num_layers: 32
+num_requests: 64
+output_len: 128
+results_dir: results/exp02_rq2_divergence
+seeds:
+- 42
+- 100
+- 2026
+skew_alpha: 0.8
+skew_alphas:
+- 0.8
+- 1.0
+- 1.2
+- 1.4
+top_k: 8

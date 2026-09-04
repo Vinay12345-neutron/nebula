@@ -1,0 +1,11 @@
+{
+  "experiment_id": "EXP-01",
+  "experiment_name": "rq1_batch_aware_placement_sweep",
+  "git_commit": "afd7e62b4b5ddacebc7ccca106859a947efe0358",
+  "timestamp": "2026-08-28T13:34:48Z",
+  "platform": "Linux-6.8.0-136-generic-x86_64-with-glibc2.39",
+  "python_version": "3.10.20",
+  "pytorch_version": "2.11.0+cu130",
+  "cuda_available": true,
+  "cuda_device_count": 2
+}

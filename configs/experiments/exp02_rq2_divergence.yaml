@@ -1,0 +1,43 @@
+# Experiment 02: RQ2 / Hypothesis H2 Request Divergence & Overlap Sweep
+experiment:
+  id: "EXP-02"
+  name: "rq2_request_divergence_overlap_sweep"
+  description: "Evaluate TierMoE batch-aware placement across request divergence and measured Jaccard overlap levels under capacity pressure."
+  target_hypothesis: "H2"
+  target_rq: "RQ2"
+
+workload:
+  dataset: "synthetic_trace_stream"
+  num_requests: 64
+  input_len: 128
+  output_len: 128
+  batch_sizes: [4, 8, 16, 32]
+  expert_skew_alphas: [0.8, 1.0, 1.2, 1.4]  # Divergence sweep: uniform/diffuse (0.8) to concentrated (1.4)
+  seeds: [42, 100, 2026]                     # Multi-seed deterministic evaluation
+  execution_type: "deterministic_multi_seed_replay"
+
+model_config: "configs/models/qwen3_30b_a3b.yaml"
+cxl_config: "configs/cxl/cxl_defaults.yaml"
+
+memory:
+  # Fast-tier expert capacity ratios (focusing strictly on capacity-constrained regimes)
+  fast_memory_ratios: [0.25, 0.50]
+
+algorithms:
+  - "baseline_0_hbm_only"
+  - "baseline_2_static_lfu"
+  - "baseline_3_single_request"
+  - "tiermoe_batch_aware_greedy"
+
+outputs:
+  results_dir: "results/exp02_rq2_divergence"
+  metrics:
+    - "hit_rate"
+    - "cxl_traffic_mb"
+    - "demand_cxl_traffic_mb"
+    - "promotion_traffic_mb"
+    - "migration_volume_mb"
+    - "solver_overhead_us"
+    - "avg_jaccard_overlap"
+    - "avg_request_divergence"
+    - "avg_expansion_ratio"

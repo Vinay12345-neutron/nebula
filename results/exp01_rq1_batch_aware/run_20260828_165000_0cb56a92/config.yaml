@@ -1,0 +1,36 @@
+algorithms:
+- baseline_0_hbm_only
+- baseline_1_naive_overflow
+- baseline_2_static_lfu
+- baseline_3_single_request
+- nebula_batch_aware_greedy
+- nebula_batch_aware_coactivation
+batch_sizes:
+- 1
+- 2
+- 4
+- 8
+- 16
+- 32
+cxl_bandwidth_gbps: 32.0
+cxl_latency_ns: 300.0
+experiment_id: EXP-01
+experiment_name: rq1_batch_aware_placement_sweep
+expert_size_bytes: 268435456
+fast_memory_ratios:
+- 0.25
+- 0.5
+- 0.75
+- 1.0
+input_len: 128
+num_experts: 128
+num_layers: 32
+num_requests: 64
+output_len: 128
+results_dir: results/exp01_rq1_batch_aware
+seeds:
+- 42
+- 100
+- 2026
+skew_alpha: 1.1
+top_k: 8

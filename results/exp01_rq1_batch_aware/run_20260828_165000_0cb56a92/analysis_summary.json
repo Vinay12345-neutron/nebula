@@ -1,0 +1,253 @@
+{
+  "run_dir": "results/exp01_rq1_batch_aware/run_20260828_165000_0cb56a92",
+  "seeds": [
+    42,
+    100,
+    2026
+  ],
+  "h1_status": "SUPPORTED",
+  "findings": [
+    "Capacity-constrained conditions evaluated: 4 settings.",
+    "Average hit rate delta in constrained regime: +3.79% (Batch-Aware vs Single-Request).",
+    "Average CXL traffic reduction in constrained regime: 16.94%.",
+    "Hypothesis H1 SUPPORTED: Batch-Aware Greedy significantly outperforms Single-Request under capacity pressure."
+  ],
+  "overall_summary": [
+    {
+      "algorithm": "Baseline-0-HBM-Only",
+      "mean_hit_rate": 1.0,
+      "mean_cxl_traffic_mb": 32768.0,
+      "mean_migration_mb": 32768.0,
+      "mean_solver_us": 11.393367673010838
+    },
+    {
+      "algorithm": "Baseline-1-Naive-Overflow",
+      "mean_hit_rate": 0.8334237502680885,
+      "mean_cxl_traffic_mb": 151804768.0,
+      "mean_migration_mb": 20480.0,
+      "mean_solver_us": 33.27600088613251
+    },
+    {
+      "algorithm": "Baseline-2-Static-LFU",
+      "mean_hit_rate": 0.880097230275472,
+      "mean_cxl_traffic_mb": 116802947.55555554,
+      "mean_migration_mb": 112632.88888888889,
+      "mean_solver_us": 32.09180574023949
+    },
+    {
+      "algorithm": "Baseline-3-Single-Request",
+      "mean_hit_rate": 0.970973531405131,
+      "mean_cxl_traffic_mb": 152575029.33333334,
+      "mean_migration_mb": 130112835.55555557,
+      "mean_solver_us": 35.458096994295865
+    },
+    {
+      "algorithm": "Nebula-Batch-Aware-CoActivation",
+      "mean_hit_rate": 0.9709301690260569,
+      "mean_cxl_traffic_mb": 133682805.33333333,
+      "mean_migration_mb": 105308999.1111111,
+      "mean_solver_us": 642.2059063124392
+    },
+    {
+      "algorithm": "Nebula-Batch-Aware-Greedy",
+      "mean_hit_rate": 0.9772859149509006,
+      "mean_cxl_traffic_mb": 132129244.44444443,
+      "mean_migration_mb": 109667050.66666667,
+      "mean_solver_us": 51.28321324482994
+    }
+  ],
+  "regime_summary": [
+    {
+      "batch_size": 1,
+      "fast_memory_ratio": 0.25,
+      "fast_capacity": 32,
+      "avg_working_set": 8.0,
+      "pressure_ratio": 0.25,
+      "pressure_regime": "no-pressure"
+    },
+    {
+      "batch_size": 1,
+      "fast_memory_ratio": 0.5,
+      "fast_capacity": 64,
+      "avg_working_set": 8.0,
+      "pressure_ratio": 0.125,
+      "pressure_regime": "no-pressure"
+    },
+    {
+      "batch_size": 1,
+      "fast_memory_ratio": 0.75,
+      "fast_capacity": 96,
+      "avg_working_set": 8.0,
+      "pressure_ratio": 0.08333333333333333,
+      "pressure_regime": "no-pressure"
+    },
+    {
+      "batch_size": 1,
+      "fast_memory_ratio": 1.0,
+      "fast_capacity": 128,
+      "avg_working_set": 8.0,
+      "pressure_ratio": 0.0625,
+      "pressure_regime": "no-pressure"
+    },
+    {
+      "batch_size": 2,
+      "fast_memory_ratio": 0.25,
+      "fast_capacity": 32,
+      "avg_working_set": 13.7739626566569,
+      "pressure_ratio": 0.43043633302052814,
+      "pressure_regime": "no-pressure"
+    },
+    {
+      "batch_size": 2,
+      "fast_memory_ratio": 0.5,
+      "fast_capacity": 64,
+      "avg_working_set": 13.7739626566569,
+      "pressure_ratio": 0.21521816651026407,
+      "pressure_regime": "no-pressure"
+    },
+    {
+      "batch_size": 2,
+      "fast_memory_ratio": 0.75,
+      "fast_capacity": 96,
+      "avg_working_set": 13.7739626566569,
+      "pressure_ratio": 0.1434787776735094,
+      "pressure_regime": "no-pressure"
+    },
+    {
+      "batch_size": 2,
+      "fast_memory_ratio": 1.0,
+      "fast_capacity": 128,
+      "avg_working_set": 13.7739626566569,
+      "pressure_ratio": 0.10760908325513203,
+      "pressure_regime": "no-pressure"
+    },
+    {
+      "batch_size": 4,
+      "fast_memory_ratio": 0.25,
+      "fast_capacity": 32,
+      "avg_working_set": 22.873252868652344,
+      "pressure_ratio": 0.7147891521453857,
+      "pressure_regime": "no-pressure"
+    },
+    {
+      "batch_size": 4,
+      "fast_memory_ratio": 0.5,
+      "fast_capacity": 64,
+      "avg_working_set": 22.873252868652344,
+      "pressure_ratio": 0.35739457607269287,
+      "pressure_regime": "no-pressure"
+    },
+    {
+      "batch_size": 4,
+      "fast_memory_ratio": 0.75,
+      "fast_capacity": 96,
+      "avg_working_set": 22.873252868652344,
+      "pressure_ratio": 0.23826305071512857,
+      "pressure_regime": "no-pressure"
+    },
+    {
+      "batch_size": 4,
+      "fast_memory_ratio": 1.0,
+      "fast_capacity": 128,
+      "avg_working_set": 22.873252868652344,
+      "pressure_ratio": 0.17869728803634644,
+      "pressure_regime": "no-pressure"
+    },
+    {
+      "batch_size": 8,
+      "fast_memory_ratio": 0.25,
+      "fast_capacity": 32,
+      "avg_working_set": 36.57628885904948,
+      "pressure_ratio": 1.1430090268452961,
+      "pressure_regime": "capacity-pressure"
+    },
+    {
+      "batch_size": 8,
+      "fast_memory_ratio": 0.5,
+      "fast_capacity": 64,
+      "avg_working_set": 36.57628885904948,
+      "pressure_ratio": 0.5715045134226481,
+      "pressure_regime": "no-pressure"
+    },
+    {
+      "batch_size": 8,
+      "fast_memory_ratio": 0.75,
+      "fast_capacity": 96,
+      "avg_working_set": 36.57628885904948,
+      "pressure_ratio": 0.38100300894843203,
+      "pressure_regime": "no-pressure"
+    },
+    {
+      "batch_size": 8,
+      "fast_memory_ratio": 1.0,
+      "fast_capacity": 128,
+      "avg_working_set": 36.57628885904948,
+      "pressure_ratio": 0.28575225671132404,
+      "pressure_regime": "no-pressure"
+    },
+    {
+      "batch_size": 16,
+      "fast_memory_ratio": 0.25,
+      "fast_capacity": 32,
+      "avg_working_set": 55.686676025390625,
+      "pressure_ratio": 1.740208625793457,
+      "pressure_regime": "severe-pressure"
+    },
+    {
+      "batch_size": 16,
+      "fast_memory_ratio": 0.5,
+      "fast_capacity": 64,
+      "avg_working_set": 55.686676025390625,
+      "pressure_ratio": 0.8701043128967285,
+      "pressure_regime": "no-pressure"
+    },
+    {
+      "batch_size": 16,
+      "fast_memory_ratio": 0.75,
+      "fast_capacity": 96,
+      "avg_working_set": 55.686676025390625,
+      "pressure_ratio": 0.5800695419311523,
+      "pressure_regime": "no-pressure"
+    },
+    {
+      "batch_size": 16,
+      "fast_memory_ratio": 1.0,
+      "fast_capacity": 128,
+      "avg_working_set": 55.686676025390625,
+      "pressure_ratio": 0.43505215644836426,
+      "pressure_regime": "no-pressure"
+    },
+    {
+      "batch_size": 32,
+      "fast_memory_ratio": 0.25,
+      "fast_capacity": 32,
+      "avg_working_set": 79.26682535807292,
+      "pressure_ratio": 2.477088292439779,
+      "pressure_regime": "severe-pressure"
+    },
+    {
+      "batch_size": 32,
+      "fast_memory_ratio": 0.5,
+      "fast_capacity": 64,
+      "avg_working_set": 79.26682535807292,
+      "pressure_ratio": 1.2385441462198894,
+      "pressure_regime": "capacity-pressure"
+    },
+    {
+      "batch_size": 32,
+      "fast_memory_ratio": 0.75,
+      "fast_capacity": 96,
+      "avg_working_set": 79.26682535807292,
+      "pressure_ratio": 0.8256960974799262,
+      "pressure_regime": "no-pressure"
+    },
+    {
+      "batch_size": 32,
+      "fast_memory_ratio": 1.0,
+      "fast_capacity": 128,
+      "avg_working_set": 79.26682535807292,
+      "pressure_ratio": 0.6192720731099447,
+      "pressure_regime": "no-pressure"
+    }
+  ]
+}

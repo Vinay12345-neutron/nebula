@@ -1,0 +1,35 @@
+# Experiment 04: Broader Baseline Reproduction & Comparative Evaluation (Phase 7)
+experiment:
+  id: "EXP-04"
+  name: "broader_baselines_comparative_sweep"
+  description: "Comprehensive multi-tier benchmark comparing TierMoE-Batch-Aware-Greedy against published baselines: Predictive Activation-Aware (MoE-Infinity/ProMoE style) and CXL-LRU Tiering (CXL-MoE style) on authentic Qwen3-30B traces."
+  phase: "Phase 7"
+
+workload:
+  dataset: "authentic_model_traces"
+  trace_file: "data/traces/qwen3_sharegpt_trace.parquet"
+  batch_sizes: [4, 8, 16, 32]
+
+model_config: "configs/models/qwen3_30b_a3b.yaml"
+cxl_config: "configs/cxl/cxl_defaults.yaml"
+
+memory:
+  # Fast-tier capacity ratios (capacity-constrained regimes: 25% and 50% of 128 experts)
+  fast_memory_ratios: [0.25, 0.50]
+
+algorithms:
+  - "baseline_0_hbm_only"
+  - "baseline_2_static_lfu"
+  - "baseline_3_single_request"
+  - "baseline_4_predictive"
+  - "baseline_5_cxl_lru"
+  - "tiermoe_batch_aware_greedy"
+
+outputs:
+  results_dir: "results/exp04_broader_baselines"
+  metrics:
+    - "hit_rate"
+    - "cxl_traffic_mb"
+    - "demand_cxl_traffic_mb"
+    - "promotion_traffic_mb"
+    - "solver_overhead_us"

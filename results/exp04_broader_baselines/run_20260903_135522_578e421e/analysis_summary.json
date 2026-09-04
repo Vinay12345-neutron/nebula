@@ -1,0 +1,128 @@
+{
+  "run_dir": "results/exp04_broader_baselines/run_20260903_135522_578e421e",
+  "algorithms": [
+    "Baseline-0-HBM-Only",
+    "Baseline-2-Static-LFU",
+    "Baseline-3-Single-Request",
+    "Baseline-4-Predictive-Activation-Aware",
+    "Baseline-5-CXL-LRU-Tiering",
+    "TierMoE-Batch-Aware-Greedy"
+  ],
+  "findings": [
+    "Capacity-constrained evaluation rows: 24 rows.",
+    "TierMoE vs Static LFU: +42.42% hit rate gain, -9.59% CXL traffic reduction (t=7.96, p=0.0041).",
+    "TierMoE vs Single-Request: +6.46% hit rate gain, 5.28% CXL traffic reduction (t=2.03, p=0.1350).",
+    "TierMoE vs Predictive (MoE-Infinity/ProMoE): +6.99% hit rate gain, 1.07% CXL traffic reduction (t=13.58, p=0.0009).",
+    "TierMoE vs CXL-LRU Tiering (CXL-MoE): +16.61% hit rate gain, -4.76% CXL traffic reduction (t=2.57, p=0.0823)."
+  ],
+  "comparisons": {
+    "Static LFU": {
+      "mean_hit_rate_gain_pct": 42.421468098958336,
+      "mean_cxl_traffic_reduction_pct": -9.593617734979416,
+      "t_stat": 7.9643688266897925,
+      "p_val": 0.004129541269840769
+    },
+    "Single-Request": {
+      "mean_hit_rate_gain_pct": 6.459554036458331,
+      "mean_cxl_traffic_reduction_pct": 5.278384147930208,
+      "t_stat": 2.032525910134159,
+      "p_val": 0.13501490110314548
+    },
+    "Predictive (MoE-Infinity/ProMoE)": {
+      "mean_hit_rate_gain_pct": 6.987508138020831,
+      "mean_cxl_traffic_reduction_pct": 1.074069169101711,
+      "t_stat": 13.579422030865318,
+      "p_val": 0.0008637988811539225
+    },
+    "CXL-LRU Tiering (CXL-MoE)": {
+      "mean_hit_rate_gain_pct": 16.605631510416664,
+      "mean_cxl_traffic_reduction_pct": -4.761676525202413,
+      "t_stat": 2.5724021440962694,
+      "p_val": 0.08232108390882063
+    }
+  },
+  "constrained_pivot_hit": [
+    {
+      "batch_size": 8,
+      "fast_memory_ratio": 0.25,
+      "Baseline-0-HBM-Only": 1.0,
+      "Baseline-2-Static-LFU": 0.3704020182291667,
+      "Baseline-3-Single-Request": 0.9217936197916666,
+      "Baseline-4-Predictive-Activation-Aware": 0.8404947916666666,
+      "Baseline-5-CXL-LRU-Tiering": 0.88330078125,
+      "TierMoE-Batch-Aware-Greedy": 0.9250895182291666
+    },
+    {
+      "batch_size": 16,
+      "fast_memory_ratio": 0.25,
+      "Baseline-0-HBM-Only": 1.0,
+      "Baseline-2-Static-LFU": 0.3793538411458333,
+      "Baseline-3-Single-Request": 0.7285563151041666,
+      "Baseline-4-Predictive-Activation-Aware": 0.7648111979166666,
+      "Baseline-5-CXL-LRU-Tiering": 0.6119384765625,
+      "TierMoE-Batch-Aware-Greedy": 0.8308512369791666
+    },
+    {
+      "batch_size": 32,
+      "fast_memory_ratio": 0.25,
+      "Baseline-0-HBM-Only": 1.0,
+      "Baseline-2-Static-LFU": 0.3870442708333333,
+      "Baseline-3-Single-Request": 0.6420491536458334,
+      "Baseline-4-Predictive-Activation-Aware": 0.7154134114583334,
+      "Baseline-5-CXL-LRU-Tiering": 0.4535319010416667,
+      "TierMoE-Batch-Aware-Greedy": 0.7761637369791666
+    },
+    {
+      "batch_size": 32,
+      "fast_memory_ratio": 0.5,
+      "Baseline-0-HBM-Only": 1.0,
+      "Baseline-2-Static-LFU": 0.6614176432291666,
+      "Baseline-3-Single-Request": 0.9442952473958334,
+      "Baseline-4-Predictive-Activation-Aware": 0.8948567708333334,
+      "Baseline-5-CXL-LRU-Tiering": 0.882080078125,
+      "TierMoE-Batch-Aware-Greedy": 0.9629720052083334
+    }
+  ],
+  "constrained_pivot_traf": [
+    {
+      "batch_size": 8,
+      "fast_memory_ratio": 0.25,
+      "Baseline-0-HBM-Only": 32768.0,
+      "Baseline-2-Static-LFU": 2498304.0,
+      "Baseline-3-Single-Request": 2813440.0,
+      "Baseline-4-Predictive-Activation-Aware": 2692864.0,
+      "Baseline-5-CXL-LRU-Tiering": 2694912.0,
+      "TierMoE-Batch-Aware-Greedy": 2663680.0
+    },
+    {
+      "batch_size": 16,
+      "fast_memory_ratio": 0.25,
+      "Baseline-0-HBM-Only": 32768.0,
+      "Baseline-2-Static-LFU": 1912320.0,
+      "Baseline-3-Single-Request": 2233344.0,
+      "Baseline-4-Predictive-Activation-Aware": 2117888.0,
+      "Baseline-5-CXL-LRU-Tiering": 2001664.0,
+      "TierMoE-Batch-Aware-Greedy": 2115328.0
+    },
+    {
+      "batch_size": 32,
+      "fast_memory_ratio": 0.25,
+      "Baseline-0-HBM-Only": 32768.0,
+      "Baseline-2-Static-LFU": 1348608.0,
+      "Baseline-3-Single-Request": 1597952.0,
+      "Baseline-4-Predictive-Activation-Aware": 1502720.0,
+      "Baseline-5-CXL-LRU-Tiering": 1372160.0,
+      "TierMoE-Batch-Aware-Greedy": 1573376.0
+    },
+    {
+      "batch_size": 32,
+      "fast_memory_ratio": 0.5,
+      "Baseline-0-HBM-Only": 32768.0,
+      "Baseline-2-Static-LFU": 892928.0,
+      "Baseline-3-Single-Request": 1024768.0,
+      "Baseline-4-Predictive-Activation-Aware": 1011712.0,
+      "Baseline-5-CXL-LRU-Tiering": 934144.0,
+      "TierMoE-Batch-Aware-Greedy": 932864.0
+    }
+  ]
+}

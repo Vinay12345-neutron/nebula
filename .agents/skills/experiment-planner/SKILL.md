@@ -2,7 +2,7 @@
 name: experiment-planner
 description: >-
   Use this skill when designing, formulating, or configuring a new experiment matrix
-  for Nebula-MoE research. Ensures experiments adhere to the reproducibility contract,
+  for TierMoE research. Ensures experiments adhere to the reproducibility contract,
   define clear baseline comparisons, and establish testable parameter sweeps.
 ---
 
