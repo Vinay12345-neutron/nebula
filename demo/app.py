@@ -204,6 +204,18 @@ if paper_path.exists():
         use_container_width=True,
     )
 
+report_path = BASE_DIR / "docs/TierMOE.pdf"
+if report_path.exists():
+    with open(report_path, "rb") as f:
+        report_bytes = f.read()
+    st.sidebar.download_button(
+        label="📑 Download Project Report (PDF)",
+        data=report_bytes,
+        file_name="TierMOE.pdf",
+        mime="application/pdf",
+        use_container_width=True,
+    )
+
 
 # =============================================================================
 # PAGE 1: OVERVIEW & ARCHITECTURE
@@ -1036,9 +1048,9 @@ elif nav_choice == "📦 Reproducibility & Paper Download":
     c1, c2 = st.columns([3, 2])
 
     with c1:
-        st.markdown("### Research Paper Access")
+        st.markdown("### Research Paper & Report Access")
         if paper_path.exists():
-            st.success(f"Full paper PDF available: `{paper_path.name}` ({os.path.getsize(paper_path):,} bytes)")
+            st.success(f"Full research paper: `{paper_path.name}` ({os.path.getsize(paper_path):,} bytes)")
             with open(paper_path, "rb") as f:
                 pdf_bytes = f.read()
             st.download_button(
@@ -1048,8 +1060,17 @@ elif nav_choice == "📦 Reproducibility & Paper Download":
                 mime="application/pdf",
                 use_container_width=True,
             )
-        else:
-            st.warning("Paper PDF not found at `docs/TierMoE_Final_Research_Paper.pdf`.")
+        if report_path.exists():
+            st.success(f"Comprehensive project report: `{report_path.name}` ({os.path.getsize(report_path):,} bytes)")
+            with open(report_path, "rb") as f:
+                rep_bytes = f.read()
+            st.download_button(
+                label="📑 Download Comprehensive Project Report PDF",
+                data=rep_bytes,
+                file_name="TierMOE.pdf",
+                mime="application/pdf",
+                use_container_width=True,
+            )
 
         st.markdown("### Execution Environment & Testbed")
         st.markdown("""
