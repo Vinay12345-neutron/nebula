@@ -10,7 +10,7 @@
 > **Author:** Vinay Jumani  
 > **Affiliation:** Department of Electrical and Electronics Engineering, BITS Pilani, K. K. Birla Goa Campus, Goa 403726, India  
 > **Contact:** `f20240695@goa.bits-pilani.ac.in` &bull; `vinayrjumain@gmail.com`  
-> **Target Venue:** IEEE Transactions on Parallel and Distributed Systems (TPDS) / Systems Technical Report 2026
+
 
 ---
 
