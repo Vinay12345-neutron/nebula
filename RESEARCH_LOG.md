@@ -96,3 +96,17 @@ A chronological record of research activities, experiments, and milestones.
 - **Activity:** Final project synthesis, baseline fidelity classification audit, transparent methodological statement grounding, and preparation of final comprehensive research report and deliverables.
 - **Milestone Status:** Research roadmap completed. All code, empirical datasets, tests (23/23 passing), and figures verified.
 
+---
+
+## [Phase 8 Extension] - EXP-05A CXL Bandwidth & Latency Sensitivity Sweep
+- **Date:** 2026-09-13
+- **Activity:** Designed and executed a controlled 81-condition sweep evaluating sensitivity to CXL bandwidth ($16, 32, 64\text{ GB/s}$) and round-trip latency overhead ($150, 300, 600\text{ ns}$) using authentic `Qwen3-30B` ShareGPT traces. Verified causal invariance of placement decisions to interconnect speed.
+- **Run Directory:** `results/exp05a_rq4_cxl_sensitivity/run_20260913_090806_4451055b`
+- **Key Empirical Results:**
+  - Bandwidth is the dominant first-order physical bottleneck ($4.00\times$ transfer time scaling across 16–64 GB/s).
+  - Round-trip latency overhead has a negligible effect ($< 0.005\%$) due to the coarse granularity of bulk 256MB expert parameter transfers.
+  - `TierMoE-Batch-Aware-Greedy` outperforms `Single-Request` control across all configurations ($+7.99\text{ pp}$ hit rate, $4.05\%$ traffic reduction, $4.05\%$ modeled parameter-transfer time reduction, $p < 10^{-6}$), saving up to $6.39\text{s}$ per run at 16 GB/s.
+  - Compared to `Static LFU`, TierMoE achieves $+46.51\text{ pp}$ hit rate gain, but incurs $+11.30\%$ modeled parameter-transfer time (+7.56s) because Static LFU avoids promotion traffic by permanently freezing its GPU resident cache.
+  - **Hypothesis H4:** **PARTIALLY SUPPORTED (Bandwidth Dominates; Latency Negligible; Outperforms Single-Request)**.
+
+

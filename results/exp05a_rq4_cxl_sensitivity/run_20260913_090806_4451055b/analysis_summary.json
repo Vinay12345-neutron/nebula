@@ -1,0 +1,176 @@
+{
+  "run_dir": "results/exp05a_rq4_cxl_sensitivity/run_20260913_090806_4451055b",
+  "total_conditions": 81,
+  "invariance_verified": true,
+  "findings": [
+    "Traffic Invariance Verified: Placement decisions and CXL traffic volumes are 100% independent of CXL bandwidth and latency parameters (max std = 0.0).",
+    "TierMoE vs. Static LFU: +46.51 pp hit rate difference, 11.30% CXL traffic increase, and 11.30% modeled CXL parameter-transfer time increase (adding an average of 7.6s per run due to dynamic promotion traffic) (t=9.23, p=1.1052e-09).",
+    "  -> Additional transfer time scales with bandwidth constraint: 13.0s added at 16 GB/s vs. 3.2s added at 64 GB/s.",
+    "TierMoE vs. Single-Request: +7.99 pp hit rate difference, 4.05% CXL traffic reduction, and 4.05% modeled CXL parameter-transfer time reduction (saving an average of 3.7s per run) (t=-6.24, p=1.3326e-06).",
+    "  -> Absolute time saved scales with bandwidth constraint: 6.4s saved at 16 GB/s vs. 1.6s saved at 64 GB/s.",
+    "Hypothesis H4 Evaluation: Bandwidth scaling factor = 4.00x (from 64 to 16 GB/s), Latency scaling factor = 1.0000x (from 150 to 600 ns). Status: PARTIALLY SUPPORTED (Bandwidth Dominates; Latency Negligible; Outperforms Single-Request)."
+  ],
+  "comparisons": {
+    "Static LFU": {
+      "mean_hit_rate_diff_pp": 46.51014539930555,
+      "mean_hit_rate_gain_pct": 46.51014539930555,
+      "mean_cxl_traffic_reduction_pct": -11.300664625232494,
+      "mean_transfer_time_reduction_pct": -11.300664625232503,
+      "mean_transfer_time_saved_s": -7.558872158444446,
+      "transfer_time_saved_by_bw_s": {
+        "16_GBps": -12.957873473999996,
+        "32_GBps": -6.479071895333344,
+        "64_GBps": -3.2396711060000003
+      },
+      "t_stat": 9.225470170664206,
+      "p_val": 1.1051946982569801e-09
+    },
+    "Single-Request": {
+      "mean_hit_rate_diff_pp": 7.990180121527773,
+      "mean_hit_rate_gain_pct": 7.990180121527773,
+      "mean_cxl_traffic_reduction_pct": 4.048420932355607,
+      "mean_transfer_time_reduction_pct": 4.048420932355591,
+      "mean_transfer_time_saved_s": 3.725607252888874,
+      "transfer_time_saved_by_bw_s": {
+        "16_GBps": 6.386660123999964,
+        "32_GBps": 3.193396678666654,
+        "64_GBps": 1.5967649560000017
+      },
+      "t_stat": -6.239113730519103,
+      "p_val": 1.3325656303020373e-06
+    }
+  },
+  "h4_status": "PARTIALLY SUPPORTED (Bandwidth Dominates; Latency Negligible; Outperforms Single-Request)",
+  "bw_scaling_factor": 3.999749681380156,
+  "lat_scaling_factor": 1.0000459800212382,
+  "bandwidth_pivot_time_s": [
+    {
+      "batch_size": 8,
+      "cxl_bandwidth_gbps": 16.0,
+      "Baseline-2-Static-LFU": 163.73177864399983,
+      "Baseline-3-Single-Request": 184.38490083999994,
+      "TierMoE-Batch-Aware-Greedy": 174.57005397999987
+    },
+    {
+      "batch_size": 8,
+      "cxl_bandwidth_gbps": 32.0,
+      "Baseline-2-Static-LFU": 81.86735317200005,
+      "Baseline-3-Single-Request": 92.19409891999997,
+      "TierMoE-Batch-Aware-Greedy": 87.28658774000003
+    },
+    {
+      "batch_size": 8,
+      "cxl_bandwidth_gbps": 64.0,
+      "Baseline-2-Static-LFU": 40.93514043600002,
+      "Baseline-3-Single-Request": 46.098697960000045,
+      "TierMoE-Batch-Aware-Greedy": 43.64485461999999
+    },
+    {
+      "batch_size": 16,
+      "cxl_bandwidth_gbps": 16.0,
+      "Baseline-2-Static-LFU": 125.32804452000002,
+      "Baseline-3-Single-Request": 146.36704958399991,
+      "TierMoE-Batch-Aware-Greedy": 138.63261470800003
+    },
+    {
+      "batch_size": 16,
+      "cxl_bandwidth_gbps": 32.0,
+      "Baseline-2-Static-LFU": 62.665142760000016,
+      "Baseline-3-Single-Request": 73.18483339199997,
+      "TierMoE-Batch-Aware-Greedy": 69.31754680400005
+    },
+    {
+      "batch_size": 16,
+      "cxl_bandwidth_gbps": 64.0,
+      "Baseline-2-Static-LFU": 31.333691879999993,
+      "Baseline-3-Single-Request": 36.593725295999995,
+      "TierMoE-Batch-Aware-Greedy": 34.66001285200002
+    },
+    {
+      "batch_size": 32,
+      "cxl_bandwidth_gbps": 16.0,
+      "Baseline-2-Static-LFU": 88.38395428799998,
+      "Baseline-3-Single-Request": 104.725254872,
+      "TierMoE-Batch-Aware-Greedy": 103.114613336
+    },
+    {
+      "batch_size": 32,
+      "cxl_bandwidth_gbps": 32.0,
+      "Baseline-2-Static-LFU": 44.19276734399999,
+      "Baseline-3-Single-Request": 52.36356373600001,
+      "TierMoE-Batch-Aware-Greedy": 51.558228568000004
+    },
+    {
+      "batch_size": 32,
+      "cxl_bandwidth_gbps": 64.0,
+      "Baseline-2-Static-LFU": 22.097173871999995,
+      "Baseline-3-Single-Request": 26.182718168,
+      "TierMoE-Batch-Aware-Greedy": 25.78003618400001
+    }
+  ],
+  "latency_pivot_time_s": [
+    {
+      "batch_size": 8,
+      "cxl_latency_ns": 150.0,
+      "Baseline-2-Static-LFU": 81.86588932199992,
+      "Baseline-3-Single-Request": 92.19245041999997,
+      "TierMoE-Batch-Aware-Greedy": 87.28502698999993
+    },
+    {
+      "batch_size": 8,
+      "cxl_latency_ns": 300.0,
+      "Baseline-2-Static-LFU": 81.86735317200005,
+      "Baseline-3-Single-Request": 92.19409891999997,
+      "TierMoE-Batch-Aware-Greedy": 87.28658774000003
+    },
+    {
+      "batch_size": 8,
+      "cxl_latency_ns": 600.0,
+      "Baseline-2-Static-LFU": 81.87028087200004,
+      "Baseline-3-Single-Request": 92.19739592000009,
+      "TierMoE-Batch-Aware-Greedy": 87.28970923999998
+    },
+    {
+      "batch_size": 16,
+      "cxl_latency_ns": 150.0,
+      "Baseline-2-Static-LFU": 62.66402226000001,
+      "Baseline-3-Single-Request": 73.18352479199996,
+      "TierMoE-Batch-Aware-Greedy": 69.31630735400002
+    },
+    {
+      "batch_size": 16,
+      "cxl_latency_ns": 300.0,
+      "Baseline-2-Static-LFU": 62.665142760000016,
+      "Baseline-3-Single-Request": 73.18483339199997,
+      "TierMoE-Batch-Aware-Greedy": 69.31754680400005
+    },
+    {
+      "batch_size": 16,
+      "cxl_latency_ns": 600.0,
+      "Baseline-2-Static-LFU": 62.667383759999986,
+      "Baseline-3-Single-Request": 73.18745059199999,
+      "TierMoE-Batch-Aware-Greedy": 69.32002570400005
+    },
+    {
+      "batch_size": 32,
+      "cxl_latency_ns": 150.0,
+      "Baseline-2-Static-LFU": 44.19197714399999,
+      "Baseline-3-Single-Request": 52.362627436,
+      "TierMoE-Batch-Aware-Greedy": 51.557306668
+    },
+    {
+      "batch_size": 32,
+      "cxl_latency_ns": 300.0,
+      "Baseline-2-Static-LFU": 44.19276734399999,
+      "Baseline-3-Single-Request": 52.36356373600001,
+      "TierMoE-Batch-Aware-Greedy": 51.558228568000004
+    },
+    {
+      "batch_size": 32,
+      "cxl_latency_ns": 600.0,
+      "Baseline-2-Static-LFU": 44.19434774399999,
+      "Baseline-3-Single-Request": 52.365436336,
+      "TierMoE-Batch-Aware-Greedy": 51.56007236800002
+    }
+  ]
+}

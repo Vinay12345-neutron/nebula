@@ -19,6 +19,7 @@
 | **RQ2 (Workload Divergence):** Can aggregate batch-level expert demand improve residency as inter-request divergence widens? | **H2:** The advantage of batch-aware placement widens monotonically as concurrent requests diverge in expert access. | **PARTIALLY SUPPORTED**<br>*(Fixed-Operating Point Scaling)* | Within a fixed batch size ($B=16$), TierMoE's advantage widens from **$+1.99\%$ to $+9.45\%$** as divergence increases from $0.751$ to $0.908$. However, global correlation across heterogeneous batch sizes is confounded by working-set expansion ($r=0.292, p=0.272$). |
 | **RQ3 (Expert Co-Activation):** Does dynamic expert co-activation tracking outperform pure batch-frequency placement under authentic workloads? | **H3:** Incorporating temporal co-activation synergies (`TierMoE-CoActivation`) reduces cross-tier accesses compared with pure frequency (`TierMoE-Greedy`). | **NOT SUPPORTED**<br>*(Falsified on Real Traces)* | On authentic `Qwen3-30B` inference, pure `TierMoE-Greedy` matches or exceeds `TierMoE-CoActivation` ($-1.25\%$ difference, $p=0.259$). Greedy is faster ($51\,\mu\text{s}$ vs $750\,\mu\text{s}$) and avoids historical matrix inertia. |
 | **Phase 7 (Published Baselines):** How does batch-aware placement compare against published predictive and hardware-tiering paradigms? | **Comparative:** Batch-aware placement outperforms predictive lookahead and reactive LRU caching under concurrency. | **CONFIRMED** | TierMoE achieves **$+6.99\%$** higher hit rate over sequence-predictive placement ($p=0.00086$) and **$+16.61\%$ to $+32.27\%$** over CXL-LRU tiering by preventing intra-batch thrashing. |
+| **RQ4 (CXL Sensitivity):** How sensitive is TierMoE's performance to the bandwidth and latency characteristics of the CXL memory tier? | **H4:** CXL bandwidth and latency materially affect the cost of expert misses, but TierMoE's batch-aware placement should remain beneficial. | **PARTIALLY SUPPORTED**<br>*(Bandwidth Dominates)* | Modeled CXL parameter-transfer time is **critically sensitive to CXL bandwidth** ($4.00\times$ difference across $16-64\text{ GB/s}$), but **virtually insensitive to round-trip latency overhead** ($< 0.005\%$) due to 256MB bulk transfer granularity. TierMoE reduces parameter-transfer time by **$4.05\%$** over Single-Request ($p < 10^{-6}$), saving up to $6.39\text{s}$ per run at 16 GB/s, while achieving **$+7.99\text{ pp}$ higher hit rate**. Against Static LFU, TierMoE incurs $11.30\%$ higher transfer time (+7.56s) due to active expert promotion traffic, trading transfer volume for a $+46.51\text{ pp}$ hit-rate improvement. |
 
 ---
 
@@ -57,13 +58,14 @@ To maintain absolute scientific transparency:
 | **EXP-02 (Phase 5)** | Request Divergence | 384 conditions across 3 seeds & Zipf skew $\alpha \in [0.8, 1.4]$ | Online Jaccard overlap $\bar{J} \in [0.087, 0.253]$. Advantage widens monotonically with divergence under fixed batch sizes ($+1.99\% \to +9.45\%$). |
 | **EXP-03 (Phase 6)** | Authentic Model Profiling | 64 conditions on 461,184 physical `Qwen3-30B` routing events | TierMoE Greedy outperforms Static LFU by $+41.18\%$ hit rate. Temporal co-activation matches greedy ($-1.25\%$, $p=0.259$), proving simple batch frequency is superior. |
 | **EXP-04 (Phase 7)** | Broader Baseline Comparison | 24 capacity-constrained conditions on `Qwen3-30B` ShareGPT | TierMoE Greedy outperforms Predictive Lookahead by $+6.99\%$ ($p=0.00086$) and CXL-LRU Tiering by $+16.61\%$ to $+32.27\%$ by eliminating multi-tenant collisions and intra-batch thrashing. |
+| **EXP-05A (Phase 8)** | CXL Bandwidth & Latency Sensitivity | 81 conditions across 3 batch sizes, 3 bandwidths, 3 latencies on `Qwen3-30B` ShareGPT | Bandwidth scaling is $4.00\times$; latency overhead scaling is $< 0.005\%$. TierMoE outperforms Single-Request across all configurations ($+7.99\text{ pp}$ hit rate, $4.05\%$ transfer time reduction, $p < 10^{-6}$), saving up to $6.39\text{s}$ at 16 GB/s. Against Static LFU, TierMoE incurs $+11.30\%$ transfer time due to promotion traffic to gain $+46.51\text{ pp}$ hit rate. |
 
 ---
 
 ## 5. Software Architecture & Verification
 
 * **Core Codebase:** Clean room implementation in `src/` (Profiler, Simulator, Solvers, Evaluation Runner).
-* **Test Coverage:** **23 passing unit and integration tests** in `tests/` (`run_tests.py` runs in $0.342\text{ s}$).
+* **Test Coverage:** **27 passing unit and integration tests** in `tests/` (`run_tests.py` runs in $0.387\text{ s}$).
 * **Publication Figures:** Saved in `figures/`:
   - `figures/exp01_hit_rate_vs_batch.png`
   - `figures/exp01_pareto_curve.png`
@@ -73,3 +75,6 @@ To maintain absolute scientific transparency:
   - `figures/exp03_cxl_traffic_qwen3.png`
   - `figures/exp04_comparative_hit_rate.png`
   - `figures/exp04_comparative_cxl_traffic.png`
+  - `figures/exp05a_cxl_bandwidth_sensitivity.png`
+  - `figures/exp05a_cxl_latency_sensitivity.png`
+  - `figures/exp05a_transfer_time_reduction.png`

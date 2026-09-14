@@ -43,6 +43,7 @@ class SimulationStepResult:
     migration_latency_us: float
     cxl_access_latency_us: float
     solver_time_us: float
+    modeled_cxl_transfer_time_ms: float = 0.0
 
     @property
     def migration_volume_mb(self) -> float:
@@ -78,6 +79,7 @@ class SimulationSummary:
     total_cxl_access_latency_ms: float
     total_solver_time_ms: float
     avg_solver_time_us: float
+    total_modeled_cxl_transfer_time_ms: float = 0.0
     step_results: List[SimulationStepResult] = field(default_factory=list)
 
     def to_dict(self) -> Dict[str, float]:
@@ -91,6 +93,7 @@ class SimulationSummary:
             "migration_volume_mb": self.total_migration_volume_mb,
             "migration_latency_ms": self.total_migration_latency_ms,
             "cxl_access_latency_ms": self.total_cxl_access_latency_ms,
+            "modeled_cxl_transfer_time_ms": self.total_modeled_cxl_transfer_time_ms,
             "total_solver_time_ms": self.total_solver_time_ms,
             "avg_solver_time_us": self.avg_solver_time_us,
         }
@@ -146,6 +149,15 @@ class CXLMemoryTierSimulator:
         # CXL read access latency penalty for unique on-demand streaming misses
         cxl_access_latency_us = (num_unique_missing * self.latency_penalty_ns) / 1e3
 
+        # Modeled CXL parameter transfer time (milliseconds):
+        # Quantifies cross-tier transfer cost across CXL bandwidth plus link round-trip latency overhead.
+        # Total distinct expert parameter block transfers = promotions + unique unpromoted demand misses.
+        num_transfers = num_promotions + num_unique_missing
+        transfer_latency_overhead_ms = (num_transfers * self.latency_penalty_ns) / 1e6
+        bytes_per_ms = (self.bandwidth_gbps * 1e9) / 1e3
+        transfer_transmission_time_ms = (total_cxl_traffic_bytes / bytes_per_ms) if bytes_per_ms > 0 else 0.0
+        modeled_cxl_transfer_time_ms = transfer_latency_overhead_ms + transfer_transmission_time_ms
+
         return SimulationStepResult(
             step_idx=decision.step_idx,
             layer_idx=decision.layer_idx,
@@ -162,7 +174,8 @@ class CXLMemoryTierSimulator:
             migration_volume_bytes=migration_volume_bytes,
             migration_latency_us=migration_latency_us,
             cxl_access_latency_us=cxl_access_latency_us,
-            solver_time_us=decision.solver_time_us
+            solver_time_us=decision.solver_time_us,
+            modeled_cxl_transfer_time_ms=modeled_cxl_transfer_time_ms
         )
 
     def simulate_run(
@@ -187,6 +200,7 @@ class CXLMemoryTierSimulator:
         total_mig_lat_us = sum(r.migration_latency_us for r in step_results)
         total_cxl_lat_us = sum(r.cxl_access_latency_us for r in step_results)
         total_solver_us = sum(r.solver_time_us for r in step_results)
+        total_modeled_transfer_ms = sum(r.modeled_cxl_transfer_time_ms for r in step_results)
 
         return SimulationSummary(
             algorithm_name=algorithm_name,
@@ -203,5 +217,6 @@ class CXLMemoryTierSimulator:
             total_cxl_access_latency_ms=total_cxl_lat_us / 1e3,
             total_solver_time_ms=total_solver_us / 1e3,
             avg_solver_time_us=(total_solver_us / len(step_results)) if step_results else 0.0,
+            total_modeled_cxl_transfer_time_ms=total_modeled_transfer_ms,
             step_results=step_results
         )

@@ -1,0 +1,45 @@
+# Experiment 05A: CXL Bandwidth and Latency Sensitivity Sweep (Phase 8: RQ4 / H4)
+experiment:
+  id: "EXP-05A"
+  name: "cxl_sensitivity_sweep"
+  description: "Controlled sensitivity study of TierMoE-Batch-Aware-Greedy vs. Static LFU and Single-Request baselines across parameterized CXL bandwidth (16, 32, 64 GB/s) and latency (150, 300, 600 ns) configurations using authentic Qwen3-30B-A3B ShareGPT routing traces."
+  phase: "Phase 8 (EXP-05A)"
+
+workload:
+  dataset: "authentic_model_traces"
+  trace_file: "data/traces/qwen3_sharegpt_trace.parquet"
+  batch_sizes: [8, 16, 32]
+
+model:
+  name: "Qwen/Qwen3-30B-A3B-Instruct-2507"
+  num_experts: 128
+  top_k: 8
+  num_layers: 48
+  expert_size_bytes: 268435456  # 256 MB per expert
+
+memory:
+  # Fast-tier capacity ratio (capacity-constrained: 25% of 128 experts = 32 experts)
+  fast_memory_ratios: [0.25]
+
+cxl_simulation:
+  bandwidths_gbps: [16.0, 32.0, 64.0]
+  latencies_ns: [150.0, 300.0, 600.0]
+  baseline_bandwidth_gbps: 32.0
+  baseline_latency_ns: 300.0
+  contention_factor: 1.25
+
+algorithms:
+  - "baseline_2_static_lfu"
+  - "baseline_3_single_request"
+  - "tiermoe_batch_aware_greedy"
+
+outputs:
+  results_dir: "results/exp05a_rq4_cxl_sensitivity"
+  metrics:
+    - "overall_hit_rate"
+    - "cxl_traffic_mb"
+    - "demand_cxl_traffic_mb"
+    - "promotion_traffic_mb"
+    - "modeled_cxl_transfer_time_ms"
+    - "total_solver_time_ms"
+    - "avg_solver_time_us"
