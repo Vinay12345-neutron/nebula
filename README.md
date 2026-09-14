@@ -1,6 +1,7 @@
 # TierMoE: Batch-Aware Expert Placement for Memory-Tiered MoE Inference
 
 [![Paper PDF](https://img.shields.io/badge/Paper-PDF-red.svg)](docs/TierMoE_Final_Research_Paper.pdf)
+[![Report PDF](https://img.shields.io/badge/Report-PDF-orange.svg)](docs/TierMOE.pdf)
 [![LaTeX Source](https://img.shields.io/badge/Source-LaTeX-blue.svg)](docs/TierMoE_Final_Research_Paper.tex)
 [![Status](https://img.shields.io/badge/Status-Submission--Ready-success.svg)]()
 [![Model](https://img.shields.io/badge/Model-Qwen3--30B--A3B-purple.svg)]()
@@ -104,12 +105,12 @@ $$\text{Score}(e) = f_e(B) + \lambda \cdot \mathbf{1}\{e \in M_{\text{current}}\
 - **Strict Promotion:** If a non-resident expert has strictly higher demand than a resident expert ($f_{\text{new}} \ge f_{\text{res}} + 1$), it is actively promoted.
 - **Churn Prevention:** If demand is tied ($f_{\text{new}} = f_{\text{res}}$), the resident expert receives the $0.5$ bonus, avoiding an expensive 256 MiB CXL migration.
 
-### 3.3 Capacity-Constrained Top-$C$ Partitioning
-The solver selects the optimal $C$ resident experts via partial partition (`numpy.argpartition`) in $O(N)$ time:
+### 3.3 Capacity-Constrained Top-C Partitioning
+The solver selects the optimal $C$ resident experts via partial partition (`numpy.argpartition`) in $\mathcal{O}(N)$ time:
 
-$$M_{\text{HBM}}^* = \operatorname{argTopC}_{e \in E} \left(\text{Score}(e)\right)$$
+$$\mathcal{M}_{\text{HBM}}^* = \underset{S \subseteq \mathcal{E}, \, |S|=C}{\arg\max} \sum_{e \in S} \text{Score}(e)$$
 
-On an AMD EPYC 7763 processor across 10,000 profiled steps, the complete solver executes in **$51.2\,\mu\text{s} \pm 4.3\,\mu\text{s}$**, representing a small computational overhead relative to the modeled 256 MiB transfer time ($8.3886\text{ ms}$).
+On an AMD EPYC 7763 processor across 10,000 profiled steps, the complete solver executes in **51.2 μs ± 4.3 μs**, representing a small computational overhead relative to the modeled 256 MiB transfer time (8.3886 ms).
 
 ---
 
@@ -185,6 +186,7 @@ Authentic multi-tenant serving on `Qwen3-30B-A3B` across conversational dialogue
 nebula/
 ├── docs/
 │   ├── TierMoE_Final_Research_Paper.pdf       # Final 15-page publication-ready PDF
+│   ├── TierMOE.pdf                            # Comprehensive research project report
 │   ├── TierMoE_Final_Research_Paper.tex       # IEEETran LaTeX paper source
 │   ├── TierMoE_Final_Research_Paper_pre_audit.pdf # Safely archived pre-audit backup
 │   └── paper_previews/                        # High-resolution page preview images
